@@ -3,6 +3,7 @@ package com.example.escalade.bo;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import com.example.escalade.Enum.Particularite;
 
@@ -19,13 +20,13 @@ public class Bloc {
         boolean bloc;
 
         @ColumnInfo(name = "particularites")
-        List<Particularite> particularites;
+        int[] particularites;
 
         @ColumnInfo(name = "hauteur")
         float hauteur;
 
         @ColumnInfo(name = "difficulte")
-        String difficulte;
+        int difficulte;
 
         @ColumnInfo(name = "siteId")
         int siteId;
@@ -36,8 +37,8 @@ public class Bloc {
         //String video;
 
 
-        public Bloc(String nom, boolean bloc, List<Particularite> particularites,
-                    float hauteur, String difficulte, int siteId,boolean valide) {
+        public Bloc(String nom, boolean bloc,int[] particularites,
+                    float hauteur, int difficulte, int siteId,boolean valide) {
                 this.nom = nom;
                 this.bloc = bloc;
                 this.particularites = particularites;
@@ -85,11 +86,11 @@ public class Bloc {
                 this.bloc = bloc;
         }
 
-        public List<Particularite> getParticularites() {
+        public int[] getParticularites() {
                 return particularites;
         }
 
-        public void setParticularites(List<Particularite> particularites) {
+        public void setParticularites(int[] particularites) {
                 this.particularites = particularites;
         }
 
@@ -117,11 +118,11 @@ public class Bloc {
                 this.valide = valide;
         }
 
-        public String getDifficulte() {
+        public int getDifficulte() {
                 return difficulte;
         }
 
-        public void setDifficulte(String difficulte) {
+        public void setDifficulte(int difficulte) {
                 this.difficulte = difficulte;
         }
 }

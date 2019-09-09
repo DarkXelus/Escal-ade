@@ -30,4 +30,91 @@ public class Site {
     @ColumnInfo(name = "interieur")
     boolean interieur;
 
+    public Site(String nom, String adresse, float longitude, float latitude, String urlSite, String telephone, boolean interieur) {
+        this.nom = nom;
+        this.adresse = adresse;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.urlSite = urlSite;
+        this.telephone = telephone;
+        this.interieur = interieur;
+    }
+
+    @Override
+    public String toString() {
+        return "Site{" +
+                "uid=" + uid +
+                ", nom='" + nom + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", urlSite='" + urlSite + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", interieur=" + interieur +
+                '}';
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getUrlSite() {
+        return urlSite;
+    }
+
+    public void setUrlSite(String urlSite) {
+        this.urlSite = urlSite;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public boolean isInterieur() {
+        return interieur;
+    }
+
+    public void setInterieur(boolean interieur) {
+        this.interieur = interieur;
+    }
 }
