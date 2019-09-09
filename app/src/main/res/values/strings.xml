@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Escalade</string>
+    <string name="app_name" >Escalade</string>
+    <string name="todo">TODO</string>
 </resources>
