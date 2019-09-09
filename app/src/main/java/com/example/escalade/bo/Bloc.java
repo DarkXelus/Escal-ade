@@ -12,6 +12,9 @@ public class Bloc {
         @PrimaryKey(autoGenerate = true)
         private int uid;
 
+        @ColumnInfo(name = "nom")
+        String nom;
+
         @ColumnInfo(name = "bloc")
         boolean bloc;
 
@@ -21,64 +24,26 @@ public class Bloc {
         @ColumnInfo(name = "hauteur")
         float hauteur;
 
-        List<String> difficultes;
-
         @ColumnInfo(name = "difficulte")
         String difficulte;
 
-        @ColumnInfo(name = "site")
-        Site site;
-
-        @ColumnInfo(name = "exterieur")
-        boolean exterieur;
+        @ColumnInfo(name = "siteId")
+        int siteId;
 
         @ColumnInfo(name = "valide")
         boolean valide;
 
-
         //String video;
 
 
-        public Bloc(boolean bloc, List<Particularite> particularites,String difficulte, float hauteur, Site site, boolean exterieur, boolean valide) {
-                difficultes.add("3");
-                difficultes.add("3+");
-                difficultes.add("4a");
-                difficultes.add("4b");
-                difficultes.add("4c");
-                difficultes.add("5a");
-                difficultes.add("5b");
-                difficultes.add("5c");
-                difficultes.add("6a");
-                difficultes.add("6a+");
-                difficultes.add("6b");
-                difficultes.add("6b+");
-                difficultes.add("6c");
-                difficultes.add("6c+");
-                difficultes.add("7a");
-                difficultes.add("7a+");
-                difficultes.add("7b");
-                difficultes.add("7b+");
-                difficultes.add("7c");
-                difficultes.add("7c+");
-                difficultes.add("8a");
-                difficultes.add("8a+");
-                difficultes.add("8b");
-                difficultes.add("8b+");
-                difficultes.add("8c");
-                difficultes.add("8c+");
-                difficultes.add("9a");
-                difficultes.add("9a+");
-                difficultes.add("9b");
-                difficultes.add("9b+");
-                difficultes.add("9c");
-                difficultes.add("9c+");
-
+        public Bloc(String nom, boolean bloc, List<Particularite> particularites,
+                    float hauteur, String difficulte, int siteId,boolean valide) {
+                this.nom = nom;
                 this.bloc = bloc;
                 this.particularites = particularites;
                 this.hauteur = hauteur;
                 this.difficulte = difficulte;
-                this.site = site;
-                this.exterieur = exterieur;
+                this.siteId = siteId;
                 this.valide = valide;
         }
 
@@ -86,14 +51,22 @@ public class Bloc {
         public String toString() {
                 return "Bloc{" +
                         "uid=" + uid +
+                        ", nom='" + nom + '\'' +
                         ", bloc=" + bloc +
                         ", particularites=" + particularites +
                         ", hauteur=" + hauteur +
-                        ", difficulte=" + difficulte +
-                        ", site=" + site +
-                        ", exterieur=" + exterieur +
+                        ", difficulte='" + difficulte + '\'' +
+                        ", site=" + siteId +
                         ", valide=" + valide +
                         '}';
+        }
+
+        public String getNom() {
+                return nom;
+        }
+
+        public void setNom(String nom) {
+                this.nom = nom;
         }
 
         public int getUid() {
@@ -128,21 +101,12 @@ public class Bloc {
                 this.hauteur = hauteur;
         }
 
-
-        public Site getSite() {
-                return site;
+        public int getSiteId() {
+                return siteId;
         }
 
-        public void setSite(Site site) {
-                this.site = site;
-        }
-
-        public boolean isExterieur() {
-                return exterieur;
-        }
-
-        public void setExterieur(boolean exterieur) {
-                this.exterieur = exterieur;
+        public void setSiteId(int siteId) {
+                this.siteId = siteId;
         }
 
         public boolean isValide() {
