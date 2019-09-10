@@ -1,4 +1,11 @@
 <resources>
-    <string name="app_name" >Escalade</string>
+    <string name="app_name">Escalade</string>
     <string name="todo">TODO</string>
+    <string name="nom_du_site">Nom du site</string>
+    <string name="interieur">Interieur</string>
+    <string name="adresse">Adresse</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="_02">02********</string>
+    <string name="url">url</string>
 </resources>

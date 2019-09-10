@@ -7,6 +7,7 @@ import androidx.room.TypeConverters;
 import com.example.escalade.bo.Bloc;
 import com.example.escalade.bo.Site;
 import com.example.escalade.dao.BlocDao;
+import com.example.escalade.dao.SiteDao;
 import com.example.escalade.helper.Converters;
 
 @Database(entities = {Bloc.class, Site.class}, version = 1)
@@ -14,4 +15,5 @@ import com.example.escalade.helper.Converters;
 
 public abstract class AppDatabase extends RoomDatabase {
     public abstract BlocDao blocDao();
+    public abstract SiteDao siteDao();
 }
