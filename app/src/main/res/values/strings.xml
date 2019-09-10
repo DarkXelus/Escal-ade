@@ -22,4 +22,6 @@
     <string name="latitude">Latitude</string>
     <string name="_02">02********</string>
     <string name="url">url</string>
+    <string name="nom_du_bloc">Nom du bloc</string>
+    <string name="bloc">bloc</string>
 </resources>
