@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.escalade.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_bloc"
+        android:name="com.example.escalade.ui.bloc.BlocFragment"
+        android:label="@string/menu_bloc"
+        tools:layout="@layout/fragment_bloc" />
+
+    <fragment
+        android:id="@+id/nav_voie"
+        android:name="com.example.escalade.ui.voie.VoieFragment"
+        android:label="@string/menu_voie"
+        tools:layout="@layout/fragment_voie" />
+
+    <fragment
+        android:id="@+id/nav_site"
+        android:name="com.example.escalade.ui.site.SiteFragment"
+        android:label="@string/menu_site"
+        tools:layout="@layout/fragment_site" />
+
+</navigation>

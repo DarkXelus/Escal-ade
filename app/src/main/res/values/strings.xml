@@ -9,12 +9,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_home">Accueil</string>
+    <string name="menu_voie">Voies</string>
+    <string name="menu_bloc">Blocs</string>
+    <string name="menu_site">Sites</string>
     <string name="nom_du_site">Nom du site</string>
     <string name="interieur">Interieur</string>
     <string name="adresse">Adresse</string>
