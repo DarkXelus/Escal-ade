@@ -1,10 +1,12 @@
 package com.example.escalade.ui.bloc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -12,11 +14,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.escalade.CreationSiteActivity;
 import com.example.escalade.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BlocFragment extends Fragment {
 
     private BlocViewModel blocViewModel;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +35,19 @@ public class BlocFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        final FloatingActionButton fab = root.findViewById(R.id.bloc_fab_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), CreationSiteActivity.class);
+                startActivity(i);
+            }
+        });
+
+
         return root;
     }
+
+
 }
