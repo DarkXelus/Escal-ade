@@ -7,6 +7,7 @@ import androidx.room.TypeConverters;
 
 import com.example.escalade.Enum.Particularite;
 
+import java.util.Arrays;
 import java.util.List;
 @Entity
 public class Bloc {
@@ -34,11 +35,13 @@ public class Bloc {
         @ColumnInfo(name = "valide")
         boolean valide;
 
+        @ColumnInfo(name = "note")
+        float note;
+
         //String video;
 
 
-        public Bloc(String nom, boolean bloc,int[] particularites,
-                    float hauteur, int difficulte, int siteId,boolean valide) {
+        public Bloc(String nom, boolean bloc, int[] particularites, float hauteur, int difficulte, int siteId, boolean valide, float note) {
                 this.nom = nom;
                 this.bloc = bloc;
                 this.particularites = particularites;
@@ -46,6 +49,7 @@ public class Bloc {
                 this.difficulte = difficulte;
                 this.siteId = siteId;
                 this.valide = valide;
+                this.note = note;
         }
 
         @Override
@@ -54,11 +58,12 @@ public class Bloc {
                         "uid=" + uid +
                         ", nom='" + nom + '\'' +
                         ", bloc=" + bloc +
-                        ", particularites=" + particularites +
+                        ", particularites=" + Arrays.toString(particularites) +
                         ", hauteur=" + hauteur +
-                        ", difficulte='" + difficulte + '\'' +
-                        ", site=" + siteId +
+                        ", difficulte=" + difficulte +
+                        ", siteId=" + siteId +
                         ", valide=" + valide +
+                        ", note=" + note +
                         '}';
         }
 
@@ -124,5 +129,13 @@ public class Bloc {
 
         public void setDifficulte(int difficulte) {
                 this.difficulte = difficulte;
+        }
+
+        public float getNote() {
+                return note;
+        }
+
+        public void setNote(float note) {
+                this.note = note;
         }
 }

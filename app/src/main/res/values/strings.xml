@@ -15,4 +15,11 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="nom_du_site">Nom du site</string>
+    <string name="interieur">Interieur</string>
+    <string name="adresse">Adresse</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="_02">02********</string>
+    <string name="url">url</string>
 </resources>

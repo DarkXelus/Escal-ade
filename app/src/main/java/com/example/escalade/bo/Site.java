@@ -30,7 +30,10 @@ public class Site {
     @ColumnInfo(name = "interieur")
     boolean interieur;
 
-    public Site(String nom, String adresse, float longitude, float latitude, String urlSite, String telephone, boolean interieur) {
+    @ColumnInfo(name = "note")
+    float note;
+
+    public Site(String nom, String adresse, float longitude, float latitude, String urlSite, String telephone, boolean interieur, float note) {
         this.nom = nom;
         this.adresse = adresse;
         this.longitude = longitude;
@@ -38,6 +41,7 @@ public class Site {
         this.urlSite = urlSite;
         this.telephone = telephone;
         this.interieur = interieur;
+        this.note = note;
     }
 
     @Override
@@ -51,6 +55,7 @@ public class Site {
                 ", urlSite='" + urlSite + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", interieur=" + interieur +
+                ", note=" + note +
                 '}';
     }
 
@@ -116,5 +121,13 @@ public class Site {
 
     public void setInterieur(boolean interieur) {
         this.interieur = interieur;
+    }
+
+    public float getNote() {
+        return note;
+    }
+
+    public void setNote(float note) {
+        this.note = note;
     }
 }
