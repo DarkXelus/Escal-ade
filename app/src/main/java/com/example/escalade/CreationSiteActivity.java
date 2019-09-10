@@ -187,29 +187,33 @@ public class CreationSiteActivity extends AppCompatActivity {
     protected void onDestroy() {
         if(enr)
         {
-            final AppDatabase connexion = Connexion.getConnexion(this);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    AppDatabase connexion = Connexion.getConnexion(CreationSiteActivity.this);
                     connexion.siteDao().insertAll(new Site(nom, adresse, longitude, latitude, url, numero, interieur, note));
                 }
-            });
+            }).start();
         }
         super.onDestroy();
     }
 
+    int retour = 0;
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
         if(keyCode == KeyEvent.KEYCODE_BACK){
 
-            if(!nom.isEmpty()
-                    && !adresse.isEmpty())
+            if(nom != null
+                    && adresse != null)
             {
                 enr = true;
+                Toast.makeText(this, "Site enregistrer", Toast.LENGTH_SHORT).show();
                 return super.onKeyDown(keyCode, event);
             }
         }
-        Toast.makeText(this, "Les champs nom et adresse ne sont pas correctement renseigné", Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(this, "Annulation", Toast.LENGTH_SHORT).show();
         return false;
 
     }
