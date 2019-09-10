@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.escalade.bo.Site;
 import com.example.escalade.dao.SiteDao;
@@ -186,8 +187,13 @@ public class CreationSiteActivity extends AppCompatActivity {
     protected void onDestroy() {
         if(enr)
         {
-            AppDatabase connexion = Connexion.getConnexion(this);
-            connexion.siteDao().insertAll(new Site(nom,adresse,longitude,latitude,url,numero,interieur,note));
+            final AppDatabase connexion = Connexion.getConnexion(this);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    connexion.siteDao().insertAll(new Site(nom, adresse, longitude, latitude, url, numero, interieur, note));
+                }
+            });
         }
         super.onDestroy();
     }
@@ -202,11 +208,8 @@ public class CreationSiteActivity extends AppCompatActivity {
                 enr = true;
                 return super.onKeyDown(keyCode, event);
             }
-            else
-            {
-                return false;
-            }
         }
+        Toast.makeText(this, "Les champs nom et adresse ne sont pas correctement renseigné", Toast.LENGTH_SHORT).show();
         return false;
 
     }
