@@ -1,11 +1,14 @@
 package com.example.escalade.bo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Site {
+public class Site implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
@@ -43,6 +46,48 @@ public class Site {
         this.interieur = interieur;
         this.note = note;
     }
+
+    protected Site(Parcel in) {
+        uid = in.readInt();
+        nom = in.readString();
+        adresse = in.readString();
+        longitude = in.readFloat();
+        latitude = in.readFloat();
+        urlSite = in.readString();
+        telephone = in.readString();
+        interieur = in.readByte() != 0;
+        note = in.readFloat();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(uid);
+        dest.writeString(nom);
+        dest.writeString(adresse);
+        dest.writeFloat(longitude);
+        dest.writeFloat(latitude);
+        dest.writeString(urlSite);
+        dest.writeString(telephone);
+        dest.writeByte((byte) (interieur ? 1 : 0));
+        dest.writeFloat(note);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Site> CREATOR = new Creator<Site>() {
+        @Override
+        public Site createFromParcel(Parcel in) {
+            return new Site(in);
+        }
+
+        @Override
+        public Site[] newArray(int size) {
+            return new Site[size];
+        }
+    };
 
     @Override
     public String toString() {
