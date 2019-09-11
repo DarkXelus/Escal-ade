@@ -21,12 +21,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.escalade.adapter.SitesAdapter;
 import com.example.escalade.bo.Site;
 import com.example.escalade.dao.SiteDao;
 
@@ -34,6 +36,8 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+
+import java.util.List;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -108,15 +112,16 @@ public class CreationSiteActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (compoundButton.isChecked()) {
-                    edt_latitude.setText("");//.clear();
+                    edt_latitude.setText("");
                     edt_latitude.setVisibility(View.INVISIBLE);
                     edt_longitude.setText("");
-                   // edt_longitude.getText().clear();
                     edt_longitude.setVisibility(View.INVISIBLE);
+                    btn_position.setVisibility(View.INVISIBLE);
                     edt_telephone.setVisibility(View.VISIBLE);
                 } else {
                     edt_latitude.setVisibility(View.VISIBLE);
                     edt_longitude.setVisibility(View.VISIBLE);
+                    btn_position.setVisibility(View.VISIBLE);
                     edt_telephone.setVisibility(View.INVISIBLE);
                     edt_telephone.getText().clear();
                 }
@@ -223,19 +228,7 @@ public class CreationSiteActivity extends AppCompatActivity {
 
     private boolean enr;
 
-    @Override
-    protected void onDestroy() {
-        if (enr) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    AppDatabase connexion = Connexion.getConnexion(CreationSiteActivity.this);
-                    connexion.siteDao().insertAll(new Site(nom, adresse, longitude, latitude, url, numero, interieur, note));
-                }
-            }).start();
-        }
-        super.onDestroy();
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -249,25 +242,42 @@ public class CreationSiteActivity extends AppCompatActivity {
             this.finish();
             return true;
         }
+        if(item.getItemId() == R.id.menu_creation_enregistrer){
+            if (nom != null
+                    && adresse != null) {
+                enr = true;
+                saveInDB();
+                return true;
+            }
+            else
+            {
+                Toast.makeText(this, "Les champs nom et adresse doivent etre renseigné", Toast.LENGTH_SHORT).show();
+            }
+        }
         return false;
     }
+    public void saveInDB(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                AppDatabase connexion = Connexion.getConnexion(CreationSiteActivity.this);
+
+                List<Long> list = connexion.siteDao().insertAll(new Site(nom, adresse, longitude, latitude, url, numero, interieur, note));
+                CreationSiteActivity.this.finish();
+
+            }
+        }).start();
+    }
+
 
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            saveInDB();
 
-            if (nom != null
-                    && adresse != null) {
-                enr = true;
-                Toast.makeText(this, "Site enregistrer", Toast.LENGTH_SHORT).show();
-                return super.onKeyDown(keyCode, event);
-            }
-            else
-            {
-                Toast.makeText(this, "Annulation", Toast.LENGTH_SHORT).show();
-            }
+            return true;
         }
 
         return false;

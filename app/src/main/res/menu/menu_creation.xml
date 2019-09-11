@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_creation_enregistrer"
+        android:icon="@drawable/ic_save_black_24dp"
+        android:title="enregistrer"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menu_creation_annuler"
         android:icon="@drawable/ic_close_black_24dp"
         android:title="@string/annuler"

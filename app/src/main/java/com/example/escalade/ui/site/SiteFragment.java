@@ -1,5 +1,6 @@
 package com.example.escalade.ui.site;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.ReceiverCallNotAllowedException;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -38,14 +40,18 @@ public class SiteFragment extends Fragment {
     List<Site> siteArrayList;
     SitesAdapter adapter;
     SiteDao dao;
+    private View root;
+    private RecyclerView recyclerView;
+    OnReloadListListener listListener;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         sitesViewModel =
                 ViewModelProviders.of(this).get(SitesViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_site, container, false);
+        root = inflater.inflate(R.layout.fragment_site, container, false);
         siteArrayList = new ArrayList<>();
+        dao = Connexion.getConnexion(getActivity()).siteDao();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -55,9 +61,8 @@ public class SiteFragment extends Fragment {
             }
         }).start();
 
-        RecyclerView recyclerView = root.findViewById(R.id.fragment_site_rc_sites);
+        recyclerView = root.findViewById(R.id.fragment_site_rc_sites);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         adapter = new SitesAdapter(siteArrayList, new SitesAdapter.OnSiteClickListener() {
             @Override
@@ -80,5 +85,25 @@ public class SiteFragment extends Fragment {
         });
 
         return root;
+    }
+
+    public void reloadList(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.setSiteArrayList(dao.getAll(),getActivity());
+            }
+        }).start();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnReloadListListener)
+            listListener = (OnReloadListListener) context;
+            listListener.onReload(this);
+    }
+    public interface OnReloadListListener{
+        void onReload(SiteFragment fragment);
     }
 }
