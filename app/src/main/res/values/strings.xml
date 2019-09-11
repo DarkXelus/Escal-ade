@@ -31,7 +31,7 @@
     <string name="jetee">jetee</string>
     <string name="hauteur_du_bloc">Hauteur du Bloc</string>
     <string name="difficult_e">Difficultée :</string>
-    
+   
     
     <string-array name="array_difficulte">
         <item>3</item>
@@ -67,4 +67,5 @@
         <item>9c</item>
         <item>9c+</item>
     </string-array>
+    <string name="annuler">annuler</string>
 </resources>
