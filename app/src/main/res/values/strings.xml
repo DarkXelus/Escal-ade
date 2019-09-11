@@ -22,4 +22,5 @@
     <string name="url">url</string>
     <string name="nom_du_bloc">Nom du bloc</string>
     <string name="bloc">bloc</string>
+    <string name="annuler">annuler</string>
 </resources>
