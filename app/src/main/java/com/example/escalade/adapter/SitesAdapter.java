@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.escalade.R;
 import com.example.escalade.bo.Site;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SitesAdapter extends RecyclerView.Adapter<SitesAdapter.SitesViewHolder>  {
@@ -40,6 +39,8 @@ public class SitesAdapter extends RecyclerView.Adapter<SitesAdapter.SitesViewHol
         this.siteArrayList = siteArrayList;
         this.listener = listener;
     }
+
+
 
     @NonNull
     @Override
@@ -89,5 +90,6 @@ public class SitesAdapter extends RecyclerView.Adapter<SitesAdapter.SitesViewHol
             }
         });
     }
+
 
 }

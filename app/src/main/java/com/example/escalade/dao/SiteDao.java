@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import com.example.escalade.bo.Site;
 
@@ -11,20 +12,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Dao
-public interface SiteDao {
+public abstract class SiteDao {
 
     @Query("SELECT * FROM site")
-    List<Site> getAll();
+    public abstract List<Site> getAll();
 
     /*@Query("SELECT * FROM site WHERE uid IN (:siteIds)")
     ArrayList<Site> loadAllByIds(int[] siteIds);*/
 
     @Query("SELECT * FROM site WHERE nom LIKE :nom LIMIT 1")
-    Site findByName(String nom);
+    public abstract Site findByName(String nom);
 
     @Insert
-    void insertAll(Site... sites);
+    public abstract List<Long> insertAll(Site... sites);
 
+    /*@Transaction
+    public List<Long> insertAllInTransaction(Site... sites){
+        return  insertAll(sites);
+    }
+*/
     @Delete
-    void delete(Site site);
+    public abstract void delete(Site site);
 }
