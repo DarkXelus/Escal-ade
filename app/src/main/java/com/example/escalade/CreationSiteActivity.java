@@ -1,15 +1,12 @@
 package com.example.escalade;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.room.Room;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -21,21 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.escalade.adapter.SitesAdapter;
 import com.example.escalade.bo.Site;
-import com.example.escalade.dao.SiteDao;
-
-import org.osmdroid.api.IMapController;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView;
 
 import java.util.List;
 
@@ -54,12 +43,16 @@ public class CreationSiteActivity extends AppCompatActivity {
     private EditText edt_latitude;
     private EditText edt_longitude;
     private Button btn_position;
+    public static final String KEY_ARTICLE = "KEY_ARTICLE";
+    private Site site;
+    private boolean enr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creation_site);
         setSupportActionBar((Toolbar)findViewById(R.id.creation_site_tl));
+        site = getIntent().getParcelableExtra(KEY_ARTICLE);
 
         EditText edt_nom = findViewById(R.id.creation_site_edt_nom);
         final EditText edt_adresse = findViewById(R.id.creation_site_edt_adresse);
@@ -69,7 +62,31 @@ public class CreationSiteActivity extends AppCompatActivity {
         final EditText edt_telephone = findViewById(R.id.creation_site_edt_telephone);
         final EditText edt_url = findViewById(R.id.creation_site_edt_url);
         btn_position = findViewById(R.id.creation_site_btn_position);
-        RatingBar rb_note = findViewById(R.id.creation_site_rb_note);
+        RatingBar rb_note = findViewById(R.id.element_list_site_rb_note);
+
+        if(site != null) {
+            nom = site.getNom();
+            adresse = site.getAdresse();
+            interieur = site.isInterieur();
+            latitude = site.getLatitude();
+            longitude = site.getLongitude();
+            note = site.getNote();
+            numero = site.getTelephone();
+            url = site.getUrlSite();
+
+            edt_nom.setText(site.getNom());
+            edt_adresse.setText(site.getAdresse());
+            sw_interieur.setChecked(site.isInterieur());
+            if (site.isInterieur()) {
+                edt_telephone.setText(site.getTelephone());
+            } else {
+                edt_longitude.setText("" + site.getLongitude());
+                edt_latitude.setText("" + site.getLatitude());
+            }
+
+            edt_url.setText(site.getUrlSite());
+            rb_note.setRating(site.getNote());
+        }
 
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE);
@@ -226,8 +243,6 @@ public class CreationSiteActivity extends AppCompatActivity {
         });
     }
 
-    private boolean enr;
-
 
 
     @Override
@@ -243,8 +258,8 @@ public class CreationSiteActivity extends AppCompatActivity {
             return true;
         }
         if(item.getItemId() == R.id.menu_creation_enregistrer){
-            if (nom != null
-                    && adresse != null) {
+            if ((nom != null ||site.getNom() != null)
+                    && (adresse != null || site.getAdresse() != null)) {
                 enr = true;
                 saveInDB();
                 return true;
@@ -262,8 +277,23 @@ public class CreationSiteActivity extends AppCompatActivity {
             @Override
             public void run() {
                 AppDatabase connexion = Connexion.getConnexion(CreationSiteActivity.this);
+                if(site.getUid() == 0)
+                {
+                    List<Long> list = connexion.siteDao().insertAll(new Site(nom, adresse, longitude, latitude, url, numero, interieur, note));
+                }else
+                {
+                    site.setNom(nom);
+                    site.setAdresse(adresse);
+                    site.setInterieur(interieur);
+                    site.setLatitude(latitude);
+                    site.setLongitude(longitude);
+                    site.setNote(note);
+                    site.setTelephone(numero);
+                    site.setUrlSite(url);
 
-                List<Long> list = connexion.siteDao().insertAll(new Site(nom, adresse, longitude, latitude, url, numero, interieur, note));
+
+                    int t =  connexion.siteDao().update(site);
+                }
                 CreationSiteActivity.this.finish();
 
             }
@@ -290,4 +320,6 @@ public class CreationSiteActivity extends AppCompatActivity {
             btn_position.setEnabled(true);
         }
     }
+
+
 }

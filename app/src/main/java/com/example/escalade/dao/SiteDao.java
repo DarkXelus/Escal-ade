@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.example.escalade.bo.Site;
 
@@ -26,14 +27,15 @@ public abstract class SiteDao {
     @Query("SELECT * FROM site WHERE uid LIKE :id LIMIT 1")
     public abstract Site get(int id);
 
+	@Query("SELECT * FROM site WHERE uid LIKE :id LIMIT 1")
+    public abstract Site findById(int id);
+    
     @Insert
     public abstract List<Long> insertAll(Site... sites);
 
-    /*@Transaction
-    public List<Long> insertAllInTransaction(Site... sites){
-        return  insertAll(sites);
-    }
-*/
+    @Update
+    public abstract int update(Site... sites);
+
     @Delete
     public abstract void delete(Site site);
 }

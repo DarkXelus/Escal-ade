@@ -101,9 +101,10 @@ public class SiteFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnReloadListListener)
+        if (context instanceof OnReloadListListener) {
             listListener = (OnReloadListListener) context;
             listListener.onReload(this);
+        }
     }
 
 

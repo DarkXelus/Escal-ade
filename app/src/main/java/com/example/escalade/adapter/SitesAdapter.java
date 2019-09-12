@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,13 +25,14 @@ public class SitesAdapter extends RecyclerView.Adapter<SitesAdapter.SitesViewHol
 
 
         private final TextView tv_nom;
-        private final TextView tv_note;
+        private final RatingBar rb_note;
         private final ImageView iv_interieur;
 
         public SitesViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_nom = itemView.findViewById(R.id.element_list_bloc_tv_nom);
-            tv_note = itemView.findViewById(R.id.element_list_bloc_tv_note);
+            
+            tv_nom = itemView.findViewById(R.id.element_list_site_tv_nom);
+            rb_note = itemView.findViewById(R.id.element_list_site_rb_note);
             iv_interieur = itemView.findViewById(R.id.element_list_site_iv_interieur);
         }
     }
@@ -53,7 +55,7 @@ public class SitesAdapter extends RecyclerView.Adapter<SitesAdapter.SitesViewHol
     public void onBindViewHolder(@NonNull SitesViewHolder holder, int position) {
         final Site siteAAfficher = siteArrayList.get(position);
         holder.tv_nom.setText(siteAAfficher.getNom());
-        holder.tv_note.setText(String.valueOf(siteAAfficher.getNote()));
+        holder.rb_note.setRating(siteAAfficher.getNote());
 
         if(siteAAfficher.isInterieur())
         {

@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DetailBlocActivity"></activity>
-        <activity android:name=".DetailSiteActivity" />
+        <activity android:name=".DetailSiteActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".CreationBlocActivity"
             android:theme="@style/AppTheme.NoActionBar" />

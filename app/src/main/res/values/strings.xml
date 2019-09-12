@@ -68,4 +68,6 @@
         <item>9c+</item>
     </string-array>
     <string name="annuler">annuler</string>
+    <string name="modification">modification</string>
+    <string name="site_web">site web</string>
 </resources>

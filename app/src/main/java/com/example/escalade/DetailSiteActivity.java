@@ -2,22 +2,33 @@ package com.example.escalade;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.escalade.bo.Site;
+import com.example.escalade.ui.site.SiteFragment;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+
+import java.net.URI;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -35,6 +46,7 @@ public class DetailSiteActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_site);
+        setSupportActionBar((Toolbar)findViewById(R.id.detail_site_tl));
 
         site = getIntent().getParcelableExtra(KEY_ARTICLE);
         nom = findViewById(R.id.detail_bloc_tv_nom);
@@ -51,6 +63,60 @@ public class DetailSiteActivity extends AppCompatActivity{
                 Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AppDatabase connexion = Connexion.getConnexion(DetailSiteActivity.this);
+                        site = connexion.siteDao().findById(site.getUid());
+                        nom.setText(site.getNom());
+                        adresse.setText(site.getAdresse());
+                        note.setRating(site.getNote());
+                    }
+                }).start();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detail,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menu_detail_item_modification){
+
+            Intent intentToDetail = new Intent(
+                    this, CreationSiteActivity.class);
+            intentToDetail.putExtra(KEY_ARTICLE,site);
+            startActivity(intentToDetail);
+            return true;
+        }
+        if(item.getItemId() == R.id.menu_detail_item_url){
+            if(site.getUrlSite() != null && site.getUrlSite() != "") {
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(site.getUrlSite()));
+                startActivity(intent);
+            }
+           return true;
+        }
+        return false;
     }
 
     @Override
