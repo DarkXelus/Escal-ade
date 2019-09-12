@@ -175,7 +175,10 @@ public class CreationSiteActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editable != null) {
-                    longitude = Float.parseFloat(editable.toString().isEmpty() ? "0.00":editable.toString());
+
+                    if(!(editable.length()==1 && "-".equals(editable.toString()))) {
+                        longitude = Float.parseFloat(editable.toString().isEmpty() ? "0.00" : editable.toString());
+                    }
                 }
             }
         });
@@ -194,8 +197,10 @@ public class CreationSiteActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editable != null) {
-                    String test = editable.toString();
-                    latitude = Float.parseFloat(editable.toString().isEmpty() ? "0.00":editable.toString());
+                    if(!(editable.length()==1 && "-".equals(editable.toString())))
+                    {
+                        latitude = Float.parseFloat(editable.toString().isEmpty() ? "0.00":editable.toString());
+                    }
                 }
             }
         });
@@ -279,7 +284,7 @@ public class CreationSiteActivity extends AppCompatActivity {
                 AppDatabase connexion = Connexion.getConnexion(CreationSiteActivity.this);
                 if(site.getUid() == 0)
                 {
-                    List<Long> list = connexion.siteDao().insertAll(new Site(nom, adresse, longitude, latitude, url, numero, interieur, note));
+                    List<Long> list = connexion.siteDao().insertAll(new Site(nom, adresse,  latitude,longitude, url, numero, interieur, note));
                 }else
                 {
                     site.setNom(nom);

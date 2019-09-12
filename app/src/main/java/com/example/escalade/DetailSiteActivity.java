@@ -23,6 +23,9 @@ import com.example.escalade.ui.site.SiteFragment;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
+import org.osmdroid.events.MapListener;
+import org.osmdroid.events.ScrollEvent;
+import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -33,7 +36,7 @@ import java.net.URI;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class DetailSiteActivity extends AppCompatActivity{
+public class DetailSiteActivity extends AppCompatActivity  {
     public static final String KEY_ARTICLE = "KEY_ARTICLE";
     public static final int REQUEST_CODE = 454;
 
@@ -80,6 +83,10 @@ public class DetailSiteActivity extends AppCompatActivity{
                         nom.setText(site.getNom());
                         adresse.setText(site.getAdresse());
                         note.setRating(site.getNote());
+                        ActivityCompat.requestPermissions(DetailSiteActivity.this, new String[]{
+                                Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
+
                     }
                 }).start();
             }
@@ -130,10 +137,27 @@ public class DetailSiteActivity extends AppCompatActivity{
             mv.setBuiltInZoomControls(true);
             mv.setMultiTouchControls(true);
 
-            IMapController controller = mv.getController();
+            final IMapController controller = mv.getController();
             Toast.makeText(DetailSiteActivity.this, site.getLatitude()+","+site.getLongitude(), Toast.LENGTH_SHORT).show();
-            controller.setCenter(new GeoPoint(site.getLatitude(),site.getLongitude()));
-            controller.animateTo(new GeoPoint(site.getLatitude(),site.getLongitude()));
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //controller.setCenter(new GeoPoint(site.getLatitude(),site.getLongitude()));
+                            controller.animateTo(new GeoPoint(site.getLatitude(),site.getLongitude()));
+                        }
+                    });
+                }
+            }).start();
+
 
             controller.setZoom(18.0);
 

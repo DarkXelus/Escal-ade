@@ -62,7 +62,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/longitude"
-        android:inputType="number"
+        android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creation_site_edt_adresse"
@@ -75,11 +75,11 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/latitude"
-        android:inputType="textPersonName"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creation_site_edt_longitude"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/creation_site_edt_longitude" />
 
     <EditText
         android:id="@+id/creation_site_edt_telephone"
