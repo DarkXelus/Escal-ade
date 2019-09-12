@@ -49,7 +49,7 @@ public class VoieFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         blocsViewModel =
                 ViewModelProviders.of(this).get(BlocViewModel.class);
-        root = inflater.inflate(R.layout.fragment_bloc, container, false);
+        root = inflater.inflate(R.layout.fragment_voie, container, false);
         blocArrayList = new ArrayList<>();
         dao = Connexion.getConnexion(getActivity()).blocDao();
         new Thread(new Runnable() {
