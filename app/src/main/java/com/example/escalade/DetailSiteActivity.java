@@ -67,21 +67,28 @@ public class DetailSiteActivity extends AppCompatActivity{
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        new Thread(new Runnable() {
+    protected void onRestart() {
+        super.onRestart();
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                AppDatabase connexion = Connexion.getConnexion(DetailSiteActivity.this);
-                site = connexion.siteDao().findById(site.getUid());
-
-                nom.setText(site.getNom());
-                adresse.setText(site.getAdresse());
-                note.setRating(site.getNote());
-
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AppDatabase connexion = Connexion.getConnexion(DetailSiteActivity.this);
+                        site = connexion.siteDao().findById(site.getUid());
+                        nom.setText(site.getNom());
+                        adresse.setText(site.getAdresse());
+                        note.setRating(site.getNote());
+                    }
+                }).start();
             }
-        }).start();
+        });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 
