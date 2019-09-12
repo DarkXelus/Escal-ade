@@ -282,7 +282,7 @@ public class CreationSiteActivity extends AppCompatActivity {
             @Override
             public void run() {
                 AppDatabase connexion = Connexion.getConnexion(CreationSiteActivity.this);
-                if(site.getUid() == 0)
+                if(site == null || site.getUid() == 0 )
                 {
                     List<Long> list = connexion.siteDao().insertAll(new Site(nom, adresse,  latitude,longitude, url, numero, interieur, note));
                 }else

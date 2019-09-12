@@ -1,29 +1,17 @@
 package com.example.escalade;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.escalade.bo.Bloc;
 import com.example.escalade.bo.Site;
 
-import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView;
-
-import java.util.List;
-
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class DetailBlocActivity extends AppCompatActivity {
     public static final String KEY_ARTICLE = "KEY_ARTICLE";
@@ -44,11 +32,11 @@ public class DetailBlocActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_bloc);
 
         bloc = getIntent().getParcelableExtra(KEY_ARTICLE);
-        nom = findViewById(R.id.detail_bloc_tv_nom);
+        nom = findViewById(R.id.detail_site_tv_nom);
         hauteur = findViewById(R.id.detail_bloc_tv_hauteur);
         difficulte = findViewById(R.id.detail_bloc_tv_difficulte);
         site = findViewById(R.id.detail_bloc_tv_site);
-        note = findViewById(R.id.detail_bloc_rb_note);
+        note = findViewById(R.id.detail_site_rb_note);
         img = findViewById(R.id.detail_bloc_iv_bloc);
 
         nom.setText(bloc.getNom());

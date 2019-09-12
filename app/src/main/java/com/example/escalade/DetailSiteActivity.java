@@ -52,9 +52,9 @@ public class DetailSiteActivity extends AppCompatActivity  {
         setSupportActionBar((Toolbar)findViewById(R.id.detail_site_tl));
 
         site = getIntent().getParcelableExtra(KEY_ARTICLE);
-        nom = findViewById(R.id.detail_bloc_tv_nom);
+        nom = findViewById(R.id.detail_site_tv_nom);
         adresse = findViewById(R.id.detail_site_tv_adresse);
-        note = findViewById(R.id.detail_bloc_rb_note);
+        note = findViewById(R.id.detail_site_rb_note);
 
         nom.setText(site.getNom());
         adresse.setText(site.getAdresse());
@@ -74,20 +74,22 @@ public class DetailSiteActivity extends AppCompatActivity  {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        AppDatabase connexion = Connexion.getConnexion(DetailSiteActivity.this);
-                        site = connexion.siteDao().findById(site.getUid());
-                        nom.setText(site.getNom());
-                        adresse.setText(site.getAdresse());
-                        note.setRating(site.getNote());
-                        ActivityCompat.requestPermissions(DetailSiteActivity.this, new String[]{
-                                Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
 
-                    }
-                }).start();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AppDatabase connexion = Connexion.getConnexion(DetailSiteActivity.this);
+                                site = connexion.siteDao().findById(site.getUid());
+                                nom.setText(site.getNom());
+                                adresse.setText(site.getAdresse());
+                                note.setRating(site.getNote());
+                                ActivityCompat.requestPermissions(DetailSiteActivity.this, new String[]{
+                                        Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
+
+                            }
+                        }).start();
+
             }
         });
     }
