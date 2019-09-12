@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SiteFragment.OnReloadListListener {
 
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements SiteFragment.OnRe
     @Override
     protected void onRestart() {
         super.onRestart();
-        Toast.makeText(this, "RESUME", Toast.LENGTH_SHORT).show();
         siteFragment.reloadList();
     }
 

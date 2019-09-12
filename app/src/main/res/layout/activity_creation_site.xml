@@ -111,7 +111,7 @@
 
 
     <view
-        android:id="@+id/creation_site_rb_note"
+        android:id="@+id/element_list_site_rb_note"
         class="me.zhanghai.android.materialratingbar.MaterialRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
