@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.example.escalade.R;
 import com.example.escalade.adapter.SitesAdapter;
 import com.example.escalade.bo.Site;
 import com.example.escalade.dao.SiteDao;
+import com.example.escalade.ui.bloc.BlocFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -103,7 +105,11 @@ public class SiteFragment extends Fragment {
             listListener = (OnReloadListListener) context;
             listListener.onReload(this);
     }
+
+
     public interface OnReloadListListener{
         void onReload(SiteFragment fragment);
+
+        void onReload(BlocFragment fragment);
     }
 }

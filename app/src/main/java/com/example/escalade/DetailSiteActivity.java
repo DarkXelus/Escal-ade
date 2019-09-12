@@ -7,7 +7,6 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,8 +18,6 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -40,9 +37,9 @@ public class DetailSiteActivity extends AppCompatActivity{
         setContentView(R.layout.activity_detail_site);
 
         site = getIntent().getParcelableExtra(KEY_ARTICLE);
-        nom = findViewById(R.id.detail_site_tv_nom);
+        nom = findViewById(R.id.detail_bloc_tv_nom);
         adresse = findViewById(R.id.detail_site_tv_adresse);
-        note = findViewById(R.id.detail_site_rb_note);
+        note = findViewById(R.id.detail_bloc_rb_note);
 
         nom.setText(site.getNom());
         adresse.setText(site.getAdresse());

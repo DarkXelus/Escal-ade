@@ -7,13 +7,14 @@
     tools:context=".CreationBlocActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/creation_bloc_tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,104 +22,196 @@
         android:id="@+id/creation_bloc_edt_nom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/nom_du_bloc"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/creation_bloc_sw_bloc"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/creation_bloc_tl"
         tools:targetApi="o" />
 
     <Switch
         android:id="@+id/creation_bloc_sw_bloc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:text="@string/bloc"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/creation_check_toit"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creation_bloc_edt_nom" />
 
-    <EditText
-        android:id="@+id/creation_bloc_edt_adresse"
+    <CheckBox
+        android:id="@+id/creation_check_dever"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="@string/adresse"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="@string/dever"
+        app:layout_constraintEnd_toStartOf="@+id/creation_check_dalle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/creation_check_toit"
+        app:layout_constraintTop_toBottomOf="@+id/creation_bloc_sw_bloc" />
+
+    <CheckBox
+        android:id="@+id/creation_check_toit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/toit"
+        app:layout_constraintBottom_toBottomOf="@+id/creation_check_dalle"
+        app:layout_constraintEnd_toStartOf="@+id/creation_check_dever"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creation_bloc_sw_bloc"
-        android:autofillHints="" tools:targetApi="o"/>
+        app:layout_constraintTop_toTopOf="@+id/creation_check_dever" />
+
+    <CheckBox
+        android:id="@+id/creation_check_dalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dalle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/creation_check_dever"
+        app:layout_constraintTop_toTopOf="@+id/creation_check_dever" />
+
+    <CheckBox
+        android:id="@+id/creation_check_reglette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/reglette"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creation_check_jetee" />
+
+    <CheckBox
+        android:id="@+id/creation_check_fissure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fissure"
+        app:layout_constraintBottom_toBottomOf="@+id/creation_check_jetee"
+        app:layout_constraintEnd_toStartOf="@+id/creation_check_jetee"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/creation_check_jetee" />
+
+    <CheckBox
+        android:id="@+id/creation_check_no_foot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_foot"
+        app:layout_constraintBottom_toBottomOf="@+id/creation_check_jetee"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/creation_check_jetee"
+        app:layout_constraintTop_toTopOf="@+id/creation_check_jetee" />
+
+    <CheckBox
+        android:id="@+id/creation_check_jetee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/jetee"
+        app:layout_constraintEnd_toStartOf="@+id/creation_check_no_foot"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/creation_check_fissure"
+        app:layout_constraintTop_toBottomOf="@+id/creation_check_dever" />
 
     <EditText
-        android:id="@+id/creation_bloc_edt_longitude"
+        android:id="@+id/creation_hauteur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/longitude"
-        android:inputType="number"
+        android:hint="@string/hauteur_du_bloc"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creation_bloc_edt_adresse"
-        tools:targetApi="o" />
+        app:layout_constraintTop_toBottomOf="@+id/creation_check_reglette" tools:targetApi="o" />
 
-    <EditText
-        android:id="@+id/creation_bloc_edt_latitude"
+    <TextView
+        android:id="@+id/creation_txt_difficulte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/difficult_e"
+        app:layout_constraintEnd_toStartOf="@+id/creation_spinner_difficulte"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creation_hauteur" />
+
+    <TextView
+        android:id="@+id/creation_txt_site"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="@string/latitude"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Site : "
+        app:layout_constraintEnd_toStartOf="@+id/creation_spinner_list_site"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creation_bloc_edt_longitude"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/creation_txt_difficulte" />
 
-    <EditText
-        android:id="@+id/creation_bloc_edt_telephone"
+    <Spinner
+        android:id="@+id/creation_spinner_list_site"
+        android:layout_width="204dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/creation_spinner_difficulte"
+        app:layout_constraintTop_toBottomOf="@+id/creation_spinner_difficulte" />
+
+    <CheckBox
+        android:id="@+id/creation_valider_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/_02"
-        android:inputType="phone"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/creation_bloc_edt_url"
+        android:layout_marginTop="20dp"
+        android:text="Validé "
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creation_bloc_edt_adresse"
-        tools:targetApi="o" />
-
-    <EditText
-        android:id="@+id/creation_bloc_edt_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="@string/url"
-        android:inputType="textUri"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creation_bloc_edt_latitude"
-        android:autofillHints="" tools:targetApi="o" />
-
+        app:layout_constraintTop_toBottomOf="@+id/creation_spinner_list_site" />
 
     <view
         android:id="@+id/creation_bloc_rb_note"
         class="me.zhanghai.android.materialratingbar.MaterialRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creation_bloc_edt_url" />
+        app:layout_constraintTop_toBottomOf="@+id/creation_valider_check" />
+
+    <Spinner
+        android:id="@+id/creation_spinner_difficulte"
+        android:layout_width="206dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/creation_txt_difficulte"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/creation_txt_difficulte"
+        app:layout_constraintTop_toBottomOf="@+id/creation_hauteur" />
+
+    <TextView
+        android:id="@+id/txt_voie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="44dp"
+        android:text="Voie"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintStart_toEndOf="@+id/creation_bloc_sw_bloc"
+        app:layout_constraintTop_toBottomOf="@+id/creation_bloc_edt_nom" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

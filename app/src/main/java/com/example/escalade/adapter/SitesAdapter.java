@@ -29,8 +29,8 @@ public class SitesAdapter extends RecyclerView.Adapter<SitesAdapter.SitesViewHol
 
         public SitesViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_nom = itemView.findViewById(R.id.element_list_site_tv_nom);
-            tv_note = itemView.findViewById(R.id.element_list_site_tv_note);
+            tv_nom = itemView.findViewById(R.id.element_list_bloc_tv_nom);
+            tv_note = itemView.findViewById(R.id.element_list_bloc_tv_note);
             iv_interieur = itemView.findViewById(R.id.element_list_site_iv_interieur);
         }
     }

@@ -23,6 +23,9 @@ public abstract class SiteDao {
     @Query("SELECT * FROM site WHERE nom LIKE :nom LIMIT 1")
     public abstract Site findByName(String nom);
 
+    @Query("SELECT * FROM site WHERE uid LIKE :id LIMIT 1")
+    public abstract Site get(int id);
+
     @Insert
     public abstract List<Long> insertAll(Site... sites);
 

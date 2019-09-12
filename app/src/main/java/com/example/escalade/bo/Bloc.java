@@ -1,5 +1,8 @@
 package com.example.escalade.bo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -10,7 +13,7 @@ import com.example.escalade.Enum.Particularite;
 import java.util.Arrays;
 import java.util.List;
 @Entity
-public class Bloc {
+public class Bloc implements Parcelable {
         @PrimaryKey(autoGenerate = true)
         private int uid;
 
@@ -52,6 +55,30 @@ public class Bloc {
                 this.note = note;
         }
 
+        protected Bloc(Parcel in) {
+                uid = in.readInt();
+                nom = in.readString();
+                bloc = in.readBoolean();
+                particularites = in.createIntArray();
+                hauteur = in.readFloat();
+                difficulte = in.readByte();
+                siteId = in.readInt() ;
+                valide = in.readByte() != 0;
+                note = in.readFloat();
+        }
+
+        public static final Creator<Bloc> CREATOR = new Creator<Bloc>() {
+                @Override
+                public Bloc createFromParcel(Parcel in) {
+                        return new Bloc(in);
+                }
+
+                @Override
+                public Bloc[] newArray(int size) {
+                        return new Bloc[size];
+                }
+        };
+
         @Override
         public String toString() {
                 return "Bloc{" +
@@ -70,6 +97,7 @@ public class Bloc {
         public String getNom() {
                 return nom;
         }
+
 
         public void setNom(String nom) {
                 this.nom = nom;
@@ -137,5 +165,23 @@ public class Bloc {
 
         public void setNote(float note) {
                 this.note = note;
+        }
+
+        @Override
+        public int describeContents() {
+                return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+                parcel.writeInt(uid);
+                parcel.writeString(nom);
+                parcel.writeByte((byte) (bloc ? 1 : 0));
+                parcel.writeIntArray(particularites);
+                parcel.writeFloat(hauteur);
+                parcel.writeInt(difficulte);
+                parcel.writeInt(siteId);
+                parcel.writeByte((byte) (valide ? 1 : 0));
+                parcel.writeFloat(note);
         }
 }

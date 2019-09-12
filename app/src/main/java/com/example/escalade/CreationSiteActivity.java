@@ -256,6 +256,7 @@ public class CreationSiteActivity extends AppCompatActivity {
         }
         return false;
     }
+
     public void saveInDB(){
         new Thread(new Runnable() {
             @Override
