@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,8 +30,6 @@ import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.net.URI;
 
@@ -53,9 +52,9 @@ public class DetailSiteActivity extends AppCompatActivity  {
         setSupportActionBar((Toolbar)findViewById(R.id.detail_site_tl));
 
         site = getIntent().getParcelableExtra(KEY_ARTICLE);
-        nom = findViewById(R.id.detail_site_tv_nom);
+        nom = findViewById(R.id.detail_bloc_tv_nom);
         adresse = findViewById(R.id.detail_site_tv_adresse);
-        note = findViewById(R.id.detail_site_rb_note);
+        note = findViewById(R.id.detail_bloc_rb_note);
 
         nom.setText(site.getNom());
         adresse.setText(site.getAdresse());

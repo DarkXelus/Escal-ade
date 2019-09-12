@@ -21,18 +21,18 @@
     <string name="_02">02********</string>
     <string name="url">url</string>
     <string name="nom_du_bloc">Nom du bloc</string>
-    <string name="bloc">bloc</string>
-    <string name="dever">dever</string>
-    <string name="toit">toit</string>
-    <string name="dalle">dalle</string>
-    <string name="reglette">reglette</string>
-    <string name="fissure">fissure</string>
-    <string name="no_foot">no_foot</string>
-    <string name="jetee">jetee</string>
+    <string name="bloc">Bloc</string>
+    <string name="dever">Dever</string>
+    <string name="toit">Toit</string>
+    <string name="dalle">Dalle</string>
+    <string name="reglette">Reglette</string>
+    <string name="fissure">Fissure</string>
+    <string name="no_foot">No foot</string>
+    <string name="jetee">Jetee</string>
     <string name="hauteur_du_bloc">Hauteur du Bloc</string>
     <string name="difficult_e">Difficultée :</string>
-   
-    
+
+
     <string-array name="array_difficulte">
         <item>3</item>
         <item>3+</item>

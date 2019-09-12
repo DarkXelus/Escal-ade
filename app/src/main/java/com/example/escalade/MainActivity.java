@@ -9,7 +9,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.escalade.ui.bloc.BlocFragment;
 import com.example.escalade.ui.site.SiteFragment;
+import com.example.escalade.ui.voie.VoieFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -19,10 +21,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
-public class MainActivity extends AppCompatActivity implements SiteFragment.OnReloadListListener {
+public class MainActivity extends AppCompatActivity implements SiteFragment.OnReloadListListener, BlocFragment.OnReloadListListener, VoieFragment.OnReloadListListener {
 
     NavController navController;
     SiteFragment siteFragment;
+    BlocFragment blocFragment;
+    VoieFragment voieFragment;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements SiteFragment.OnRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.creation_bloc_tl);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -63,11 +67,27 @@ public class MainActivity extends AppCompatActivity implements SiteFragment.OnRe
     @Override
     protected void onRestart() {
         super.onRestart();
-        siteFragment.reloadList();
+        if (siteFragment != null) {
+            siteFragment.reloadList();
+        } else if (blocFragment != null) {
+            blocFragment.reloadList();
+        } else {
+            voieFragment.reloadList();
+        }
     }
 
     @Override
     public void onReload(SiteFragment fragment) {
         siteFragment = fragment;
+    }
+
+    @Override
+    public void onReload(BlocFragment fragment) {
+        blocFragment = fragment;
+    }
+
+    @Override
+    public void onReload(VoieFragment fragment) {
+        voieFragment = fragment;
     }
 }

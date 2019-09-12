@@ -10,23 +10,29 @@ import com.example.escalade.bo.Bloc;
 import java.util.List;
 
 @Dao
-public interface BlocDao {
+public abstract class BlocDao {
 
     @Query("SELECT * FROM bloc")
-    List<Bloc> getAll();
+    public abstract List<Bloc> getAll();
 
     @Query("SELECT * FROM bloc WHERE uid IN (:blocIds)")
-    List<Bloc> loadAllByIds(int[] blocIds);
+    public abstract List<Bloc> loadAllByIds(int[] blocIds);
 
     @Query("SELECT * FROM bloc WHERE nom LIKE :nom LIMIT 1")
-    Bloc findByName(String nom);
+    public abstract Bloc findByName(String nom);
 
     @Query("SELECT * FROM bloc JOIN site WHERE bloc.siteId == site.uid")
-    List<Bloc> getAllBySite();
+    public abstract List<Bloc> getAllBySite();
+
+    @Query("SELECT * FROM bloc WHERE bloc = 0")
+    public abstract  List<Bloc> getAllByBloc();
+
+    @Query("SELECT * FROM bloc WHERE bloc = 1")
+    public abstract  List<Bloc> getAllByVoie();
 
     @Insert
-    void insertAll(Bloc... blocs);
+    public abstract List<Long> insertAll(Bloc... blocs);
 
     @Delete
-    void delete(Bloc bloc);
+    public abstract void delete(Bloc bloc);
 }
