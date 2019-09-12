@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -30,7 +29,7 @@ public class BlocsAdapter extends RecyclerView.Adapter<BlocsAdapter.BlocsViewHol
 
         public BlocsViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_nom = itemView.findViewById(R.id.element_list_bloc_tv_nom);
+            tv_nom = itemView.findViewById(R.id.element_list_site_tv_nom);
             rb_note = itemView.findViewById(R.id.element_list_bloc_rb_note);
             tv_difficulte = itemView.findViewById(R.id.element_list_bloc_tv_difficulte);
         }
