@@ -22,11 +22,11 @@ import android.widget.Toast;
 
 import com.example.escalade.bo.Bloc;
 import com.example.escalade.bo.Site;
+
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class CreationBlocActivity extends AppCompatActivity implements View.OnClickListener{
+public class CreationVoieActivity extends AppCompatActivity implements View.OnClickListener{
 
     String nom;
     boolean bloc;
@@ -63,25 +63,25 @@ public class CreationBlocActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creation_bloc);
-        setSupportActionBar((Toolbar)findViewById(R.id.creation_bloc_tl));
+        setSupportActionBar((Toolbar)findViewById(R.id.creation_voie_tl));
 
         //Instancie les controllers
-        EditText nameBloc = findViewById(R.id.creation_bloc_edt_nom);
-        Switch switchBloc = findViewById(R.id.creation_bloc_sw_bloc);
-        checkBox_dever = findViewById(R.id.creation_bloc_check_dever);
-        checkBox_toit = findViewById(R.id.creation_bloc_check_toit);
-        checkBox_dalle = findViewById(R.id.creation_bloc_check_dalle);
-        checkBox_reglette = findViewById(R.id.creation_bloc_check_reglette);
-        checkBox_fissure = findViewById(R.id.creation_bloc_check_fissure);
-        checkBox_no_foot = findViewById(R.id.creation_bloc_check_no_foot);
-        checkBox_jetee = findViewById(R.id.creation_bloc_check_jetee);
-        checkBoxValider = findViewById(R.id.creation_bloc_valider_check);
-        rb_note = findViewById(R.id.creation_bloc_rb_note);
+        EditText nameBloc = findViewById(R.id.creation_voie_edt_nom);
+        Switch switchBloc = findViewById(R.id.creation_voie_sw_bloc);
+        checkBox_dever = findViewById(R.id.creation_voie_check_dever);
+        checkBox_toit = findViewById(R.id.creation_voie_check_toit);
+        checkBox_dalle = findViewById(R.id.creation_voie_check_dalle);
+        checkBox_reglette = findViewById(R.id.creation_voie_check_reglette);
+        checkBox_fissure = findViewById(R.id.creation_voie_check_fissure);
+        checkBox_no_foot = findViewById(R.id.creation_voie_check_no_foot);
+        checkBox_jetee = findViewById(R.id.creation_voie_check_jetee);
+        checkBoxValider = findViewById(R.id.creation_voie_valider_check);
+        rb_note = findViewById(R.id.creation_voie_rb_note);
 
 
-        EditText editHauteur = findViewById(R.id.creation_bloc_hauteur);
-        Spinner spinnerDifficulte = findViewById(R.id.creation_bloc_spinner_difficulte);
-        spinnerListSite = findViewById(R.id.creation_bloc_spinner_list_site);
+        EditText editHauteur = findViewById(R.id.creation_voie_hauteur);
+        Spinner spinnerDifficulte = findViewById(R.id.creation_voie_spinner_difficulte);
+        spinnerListSite = findViewById(R.id.creation_voie_spinner_list_site);
 
         //Spinner Difficulté
         ArrayAdapter<CharSequence> adapter  = ArrayAdapter.createFromResource(this,R.array.array_difficulte, android.R.layout.simple_spinner_item);
@@ -92,7 +92,7 @@ public class CreationBlocActivity extends AppCompatActivity implements View.OnCl
         new Thread(new Runnable() {
             @Override
             public void run() {
-                AppDatabase connexion = Connexion.getConnexion(CreationBlocActivity.this);
+                AppDatabase connexion = Connexion.getConnexion(CreationVoieActivity.this);
                 listSite = connexion.siteDao().getAll();
 
                 ArrayList<String> siteNames = new ArrayList<String>();
@@ -102,7 +102,7 @@ public class CreationBlocActivity extends AppCompatActivity implements View.OnCl
                 }
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                        CreationBlocActivity.this,
+                        CreationVoieActivity.this,
                         android.R.layout.simple_spinner_item,
                         siteNames
                 );
@@ -133,9 +133,9 @@ public class CreationBlocActivity extends AppCompatActivity implements View.OnCl
         });
 
         switchBloc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    bloc = isChecked;
-                }
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                bloc = isChecked;
+            }
         });
 
         editHauteur.addTextChangedListener(new TextWatcher() {
@@ -145,9 +145,7 @@ public class CreationBlocActivity extends AppCompatActivity implements View.OnCl
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable != null) {
-                    hauteur = Float.parseFloat(editable.toString());
-                }
+                hauteur = Float.parseFloat(editable.toString());
             }
         });
 
@@ -164,36 +162,36 @@ public class CreationBlocActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.creation_bloc_check_dever:
-                checkBox_dever = findViewById(R.id.creation_bloc_check_dever);
+            case R.id.creation_voie_check_dever:
+                checkBox_dever = findViewById(R.id.creation_voie_check_dever);
                 checkValue_dever = checkBox_dever.isChecked();
                 break;
-            case R.id.creation_bloc_check_toit:
-                checkBox_toit = findViewById(R.id.creation_bloc_check_toit);
+            case R.id.creation_voie_check_toit:
+                checkBox_toit = findViewById(R.id.creation_voie_check_toit);
                 checkValue_toit = checkBox_toit.isChecked();
                 break;
-            case R.id.creation_bloc_check_dalle:
-                checkBox_dalle = findViewById(R.id.creation_bloc_check_dalle);
+            case R.id.creation_voie_check_dalle:
+                checkBox_dalle = findViewById(R.id.creation_voie_check_dalle);
                 checkValue_dalle = checkBox_dalle.isChecked();
                 break;
-            case R.id.creation_bloc_check_reglette:
-                checkBox_reglette = findViewById(R.id.creation_bloc_check_reglette);
+            case R.id.creation_voie_check_reglette:
+                checkBox_reglette = findViewById(R.id.creation_voie_check_reglette);
                 checkValue_reglette = checkBox_reglette.isChecked();
                 break;
-            case R.id.creation_bloc_check_fissure:
-                checkBox_fissure = findViewById(R.id.creation_bloc_check_fissure);
+            case R.id.creation_voie_check_fissure:
+                checkBox_fissure = findViewById(R.id.creation_voie_check_fissure);
                 checkValue_fissure = checkBox_fissure.isChecked();
                 break;
-            case R.id.creation_bloc_check_no_foot:
-                checkBox_no_foot = findViewById(R.id.creation_bloc_check_no_foot);
+            case R.id.creation_voie_check_no_foot:
+                checkBox_no_foot = findViewById(R.id.creation_voie_check_no_foot);
                 checkValue_no_foot = checkBox_no_foot.isChecked();
                 break;
-            case R.id.creation_bloc_check_jetee:
-                checkBox_jetee = findViewById(R.id.creation_bloc_check_jetee);
+            case R.id.creation_voie_check_jetee:
+                checkBox_jetee = findViewById(R.id.creation_voie_check_jetee);
                 checkValue_jetee = checkBox_jetee.isChecked();
                 break;
-            case R.id.creation_bloc_valider_check:
-                checkBoxValider = findViewById(R.id.creation_bloc_valider_check);
+            case R.id.creation_voie_valider_check:
+                checkBoxValider = findViewById(R.id.creation_voie_valider_check);
                 valide = checkBoxValider.isChecked();
         }
     }
@@ -229,7 +227,7 @@ public class CreationBlocActivity extends AppCompatActivity implements View.OnCl
         new Thread(new Runnable() {
             @Override
             public void run() {
-                AppDatabase connexion = Connexion.getConnexion(CreationBlocActivity.this);
+                AppDatabase connexion = Connexion.getConnexion(CreationVoieActivity.this);
 
                 if (checkValue_dever == true) {
                     particularites[0] = 1;
@@ -259,7 +257,7 @@ public class CreationBlocActivity extends AppCompatActivity implements View.OnCl
                     }
                 }
                 List<Long> list = connexion.blocDao().insertAll(new Bloc(nom,bloc,particularites,hauteur,difficulte,siteId,valide,note));
-                CreationBlocActivity.this.finish();
+                CreationVoieActivity.this.finish();
 
             }
         }).start();

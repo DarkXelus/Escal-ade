@@ -18,15 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.escalade.AppDatabase;
 import com.example.escalade.Connexion;
-import com.example.escalade.CreationBlocActivity;
-import com.example.escalade.CreationSiteActivity;
-import com.example.escalade.DetailBlocActivity;
-import com.example.escalade.MainActivity;
+import com.example.escalade.CreationVoieActivity;
+import com.example.escalade.DetailVoieActivity;
 import com.example.escalade.R;
 import com.example.escalade.adapter.BlocsAdapter;
 import com.example.escalade.bo.Bloc;
 import com.example.escalade.dao.BlocDao;
-import com.example.escalade.ui.bloc.BlocFragment;
 import com.example.escalade.ui.bloc.BlocViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -61,25 +58,25 @@ public class VoieFragment extends Fragment {
             }
         }).start();
 
-        recyclerView = root.findViewById(R.id.fragment_bloc_rc_bloc);
+        recyclerView = root.findViewById(R.id.fragment_voie_rc_voies);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         adapter = new BlocsAdapter(blocArrayList, new BlocsAdapter.OnBlocClickListener() {
             @Override
             public void onBlocClick(Bloc bloc) {
                 Intent intentToDetail = new Intent(
-                        VoieFragment.this.getActivity(), DetailBlocActivity.class);
+                        VoieFragment.this.getActivity(), DetailVoieActivity.class);
                 intentToDetail.putExtra(KEY_ARTICLE,bloc);
                 startActivity(intentToDetail);
             }
         });
         recyclerView.setAdapter(adapter);
 
-        final FloatingActionButton fab = root.findViewById(R.id.bloc_fab_add);
+        final FloatingActionButton fab = root.findViewById(R.id.voie_fab_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), CreationBlocActivity.class);
+                Intent i = new Intent(getActivity(), CreationVoieActivity.class);
                 startActivity(i);
             }
         });

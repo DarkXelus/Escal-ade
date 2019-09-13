@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements SiteFragment.OnRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.creation_bloc_tl);
+        Toolbar toolbar = findViewById(R.id.creation_voie_tl);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

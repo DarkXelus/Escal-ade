@@ -13,7 +13,8 @@ import com.example.escalade.bo.Site;
 
 import org.osmdroid.config.Configuration;
 
-public class DetailBlocActivity extends AppCompatActivity {
+public class DetailVoieActivity extends AppCompatActivity {
+
     public static final String KEY_ARTICLE = "KEY_ARTICLE";
     public static final int REQUEST_CODE = 454;
 
@@ -29,15 +30,14 @@ public class DetailBlocActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_bloc);
+        setContentView(R.layout.activity_detail_voie);
 
         bloc = getIntent().getParcelableExtra(KEY_ARTICLE);
-        nom = findViewById(R.id.detail_site_tv_nom);
-        hauteur = findViewById(R.id.detail_bloc_tv_hauteur);
-        difficulte = findViewById(R.id.detail_bloc_tv_difficulte);
-        site = findViewById(R.id.detail_bloc_tv_site);
-        note = findViewById(R.id.detail_site_rb_note);
-        img = findViewById(R.id.detail_bloc_iv_bloc);
+        nom = findViewById(R.id.detail_voie_tv_nom);
+        hauteur = findViewById(R.id.detail_voie_tv_hauteur);
+        difficulte = findViewById(R.id.detail_voie_tx_difficulte);
+        site = findViewById(R.id.detail_voie_tx_site);
+        note = findViewById(R.id.detail_voie_rb_note);
 
         nom.setText(bloc.getNom());
         hauteur.setText(String.valueOf(bloc.getHauteur()));
@@ -45,7 +45,7 @@ public class DetailBlocActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                AppDatabase connexion = Connexion.getConnexion(DetailBlocActivity.this);
+                AppDatabase connexion = Connexion.getConnexion(DetailVoieActivity.this);
                 Site siterecup = connexion.siteDao().get(bloc.getSiteId());
                 site.setText(siterecup.getNom());
             }
@@ -54,15 +54,7 @@ public class DetailBlocActivity extends AppCompatActivity {
 
         note.setRating(bloc.getNote());
 
-        if (bloc.isBloc() == false) {
-            img.setImageResource(R.drawable.climb);
-        } else {
-            img.setImageResource(R.drawable.mountains);
-        }
 
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
     }
-
-
-
 }
